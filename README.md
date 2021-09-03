@@ -53,7 +53,7 @@ Abaixo segue o que foi utilizado na criação deste template:
 - [Axios](https://github.com/axios/axios) - O Axios é um cliente HTTP baseado em Promises para Browser e NodeJS;
 <!-- GETTING STARTED -->
 
-##Começando
+## Começando
 
 
 ### Pré-requisitos
