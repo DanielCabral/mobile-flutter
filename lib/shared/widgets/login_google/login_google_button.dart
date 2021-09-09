@@ -3,12 +3,13 @@ import 'package:learnenglish/shared/themes/app_colors.dart';
 import 'package:learnenglish/shared/themes/app_images.dart';
 
 class LoginGoogleButton extends StatelessWidget {
-  const LoginGoogleButton({Key? key}) : super(key: key);
+  final VoidCallback onTap;
+  const LoginGoogleButton({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        // onTap : onTap,
+        onTap : onTap,
         child: Container(
             height: 56,
             decoration: BoxDecoration(
@@ -37,6 +38,7 @@ class LoginGoogleButton extends StatelessWidget {
                 )),
           ],
         ),
-            ));
+        )
+    );
   }
 }
