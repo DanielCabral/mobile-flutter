@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/lessons");
+                      Navigator.pushNamed(context, "/lessons", arguments: widget.user);
                       setState(() {});
                     },
                     icon: Icon(Icons.description_outlined,
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/messages");
+                      Navigator.pushNamed(context, "/messages", arguments: widget.user);
                       setState(() {});
                     },
                     icon: Icon(Icons.mail_outline, color: AppColors.textgrey),

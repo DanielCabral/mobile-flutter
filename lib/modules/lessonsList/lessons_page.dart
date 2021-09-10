@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:learnenglish/modules/lessonsList/lessons_controller.dart';
+import 'package:learnenglish/shared/shared/models/user_model.dart';
 import 'package:learnenglish/shared/themes/app_colors.dart';
 import 'package:learnenglish/shared/widgets/lessonsList/lessons_list.dart';
 
 class LessonsPage extends StatefulWidget {
-  const LessonsPage({Key? key}) : super(key: key);
+  final UserModel user;
+  const LessonsPage({Key? key, required this.user}) : super(key: key);
 
   @override
   _LessonsPageState createState() => _LessonsPageState();
@@ -54,7 +56,7 @@ class _LessonsPageState extends State<LessonsPage> {
           onPressed: () {
             controller.getLessons();
             controller.setPage(0);
-            Navigator.pushNamed(context, "/lessons");
+            Navigator.pushNamed(context, "/lessons", arguments: widget.user);
             setState(() {});
           },
           child: const Icon(Icons.add),
@@ -67,7 +69,7 @@ class _LessonsPageState extends State<LessonsPage> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushNamed(context, "/home", arguments: widget.user);
                     },
                     icon: Icon(Icons.home_outlined, color: AppColors.textgrey),
                   ),
@@ -79,7 +81,7 @@ class _LessonsPageState extends State<LessonsPage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/messages");
+                      Navigator.pushNamed(context, "/messages", arguments: widget.user);
                     },
                     icon: Icon(Icons.mail_outline, color: AppColors.textgrey),
                   )

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:learnenglish/modules/messages/messages_controller.dart';
 import 'package:learnenglish/shared/shared/models/chat_model.dart';
+import 'package:learnenglish/shared/shared/models/user_model.dart';
 import 'package:learnenglish/shared/themes/app_colors.dart';
 import 'package:learnenglish/shared/widgets/chatList/chat_list.dart';
 
 class MessagesPage extends StatefulWidget {
-  const MessagesPage({Key? key}) : super(key: key);
+  final UserModel user;
+  const MessagesPage({Key? key, required this.user}) : super(key: key);
 
   @override
   _MessagesPageState createState() => _MessagesPageState();
@@ -31,49 +33,43 @@ class _MessagesPageState extends State<MessagesPage> {
                     fontWeight: FontWeight.bold),
               )))),
         ),
-        body:    Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ChatList(
-            data: ChatModel(
-              name: "Pedro Santos",
-              status:"Online",
-              lastView:"3 dias",
-              lastMessage: "",
-              photo:"person2.jpeg"
-            ),
-              onTap: () {
-                        Navigator.pushNamed(context, "/chat");
-                      }
+        body: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ChatList(
+                  data: ChatModel(
+                      name: "Pedro Santos",
+                      status: "Online",
+                      lastView: "3 dias",
+                      lastMessage: "",
+                      photo: "person2.jpeg"),
+                  onTap: () {
+                    Navigator.pushNamed(context, "/chat");
+                  }),
+              ChatList(
+                  data: ChatModel(
+                      name: "Jessica Vasconcelos",
+                      status: "Online",
+                      lastView: "",
+                      lastMessage: "",
+                      photo: "person2.jpeg"),
+                  onTap: () {
+                    Navigator.pushNamed(context, "/chat");
+                  }),
+              ChatList(
+                  data: ChatModel(
+                      name: "Laura Geovanne",
+                      status: "",
+                      lastView: "3 dias",
+                      lastMessage: "",
+                      photo: "person2.jpeg"),
+                  onTap: () {
+                    Navigator.pushNamed(context, "/chat");
+                  }),
+            ],
           ),
-          ChatList(
-            data: ChatModel(
-              name: "Jessica Vasconcelos",
-              status:"Online",
-              lastView:"",
-              lastMessage: "",
-              photo:"person2.jpeg"
-              ),
-                            onTap: () {
-                        Navigator.pushNamed(context, "/chat");
-                      }
-          ),
-          ChatList(
-            data: ChatModel(
-              name: "Laura Geovanne",
-              status:"",
-              lastView:"3 dias",
-              lastMessage: "",
-              photo:"person2.jpeg"
-              ),
-                            onTap: () {
-                        Navigator.pushNamed(context, "/chat");
-                      }
-          ),
-        ],
-      ),
-    ),
+        ),
         bottomNavigationBar: Container(
             height: 60,
             child: Row(
@@ -81,15 +77,16 @@ class _MessagesPageState extends State<MessagesPage> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushNamed(context, "/home", arguments: widget.user);
                     },
                     icon: Icon(Icons.home_outlined, color: AppColors.textgrey),
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/lessons");
+                      Navigator.pushNamed(context, "/lessons", arguments: widget.user);
                     },
-                    icon: Icon(Icons.description_outlined, color: AppColors.textgrey),
+                    icon: Icon(Icons.description_outlined,
+                        color: AppColors.textgrey),
                   ),
                   IconButton(
                     onPressed: () {
