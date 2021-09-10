@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LessonsController {
   var currentPage = 0;
   LessonsModel model = LessonsModel(
-    index: 0, title: "Aula", status: "Concluido"
+    index: 0, title: "Teste", status: "Concluido", url: "https://drive.google.com/file/d/15Y9BfZZaAZ2QvtkqtWT7ZUwtheula6vg/preview"
   );
 
   void setPage(int index) {
