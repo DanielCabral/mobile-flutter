@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:learnenglish/modules/lesson/video/lesson_video.dart';
 import 'package:learnenglish/modules/login/login_page.dart';
 import 'modules/home/home_page.dart';
 import 'modules/lessonsList/lessons_page.dart';
 import 'modules/messages/messages_page.dart';
 import 'modules/splash/splash_page.dart';
+import 'modules/lessonplayer/lesson_player.dart';
 import 'shared/themes/app_colors.dart';
 
 class AppWidget extends StatelessWidget {
@@ -25,7 +25,7 @@ class AppWidget extends StatelessWidget {
         "/home": (context) => HomePage(),
         "/messages": (context) => MessagesPage(),
         "/lessons": (context) => LessonsPage(),
-        "/video": (context) => LessonVideo(),
+        "/video": (context) => LessonPlayer(),
       },
     );
   }
