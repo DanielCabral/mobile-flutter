@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:learnenglish/modules/messages/messages_controller.dart';
+import 'package:learnenglish/shared/shared/models/chat_model.dart';
 import 'package:learnenglish/shared/themes/app_colors.dart';
+import 'package:learnenglish/shared/widgets/chatList/chat_list.dart';
 
 class MessagesPage extends StatefulWidget {
   const MessagesPage({Key? key}) : super(key: key);
@@ -14,20 +16,41 @@ class _MessagesPageState extends State<MessagesPage> {
 
   final pages = [
     Container(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
-          ],
-        ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ChatList(
+            data: ChatModel(
+              name: "Jessica Vasconcelos",
+              status:"Online",
+              lastView:"3 dias",
+              lastMessage: "What this name ?",
+              photo:""
+              )
+          ),
+          ChatList(
+            data: ChatModel(
+              name: "Jessica Vasconcelos",
+              status:"Online",
+              lastView:"",
+              lastMessage: "What this name ?",
+              photo:""
+              )
+          ),
+          ChatList(
+            data: ChatModel(
+              name: "Jessica Vasconcelos",
+              status:"",
+              lastView:"3 dias",
+              lastMessage: "What this name ?",
+              photo:""
+              )
+          ),
+        ],
       ),
     )];
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(152),
@@ -37,14 +60,14 @@ class _MessagesPageState extends State<MessagesPage> {
               child: Center(
                   child: ListTile(
                       title: Text(
-                "Aulas",
+                "Messagens",
                 style: TextStyle(
                     color: AppColors.background,
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               )))),
         ),
-        body: Container(),
+        body: pages[controller.currentPage],
         bottomNavigationBar: Container(
             height: 60,
             child: Row(
@@ -58,15 +81,15 @@ class _MessagesPageState extends State<MessagesPage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      controller.setPage(0);
+                      Navigator.pushNamed(context, "/lessons");
                     },
-                    icon: Icon(Icons.description, color: AppColors.primary),
+                    icon: Icon(Icons.description_outlined, color: AppColors.textgrey),
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/messages");
+                      controller.setPage(0);
                     },
-                    icon: Icon(Icons.mail_outline, color: AppColors.textgrey),
+                    icon: Icon(Icons.mail, color: AppColors.primary),
                   )
                 ])));
   }

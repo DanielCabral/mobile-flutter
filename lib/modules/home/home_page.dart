@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:learnenglish/modules/home/home_controller.dart';
 import 'package:learnenglish/shared/themes/app_colors.dart';
+import 'package:learnenglish/shared/widgets/lessonsList/lessons_list.dart';
 
 class HomePage extends StatefulWidget {
+  
   const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
-
+final List<String> entries = <String>['A', 'B', 'C'];
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
+
   final pages = [
     Container(
       child: Padding(
@@ -50,14 +53,12 @@ class _HomePageState extends State<HomePage> {
             Column(
               children: [
                 ListTile(
-                    title: Text("Progresso do curso",
-                        style: TextStyle(
-                            color: AppColors.secondary,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold)
-                    ),
+                  title: Text("Progresso do curso",
+                      style: TextStyle(
+                          color: AppColors.secondary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold)),
                 ),
-                    
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 16),
                   child: LinearProgressIndicator(
@@ -70,17 +71,22 @@ class _HomePageState extends State<HomePage> {
             Column(
               children: [
                 ListTile(
-                    title: Text("Suas Aulas",
-                        style: TextStyle(
-                            color: AppColors.secondary,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold))),
-              ],
-            ),
+                    title: Text(
+                      "Suas Aulas",
+                      style: TextStyle(
+                          color: AppColors.secondary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold
+                      )
+                    )
+                ),
+                LessonsList(),
+              ]
+            )
           ],
         ),
+        ),
       ),
-    ),
   ];
 
   @override
@@ -101,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                     fontWeight: FontWeight.bold),
               )))),
         ),
-        body: pages[controller.currentPage],
+        body: SingleChildScrollView(child: pages[controller.currentPage]),
         bottomNavigationBar: Container(
             height: 60,
             child: Row(
@@ -116,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, "/lessons");               
+                      Navigator.pushNamed(context, "/lessons");
                       setState(() {});
                     },
                     icon: Icon(Icons.description_outlined,
