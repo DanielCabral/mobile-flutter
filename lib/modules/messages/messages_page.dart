@@ -13,42 +13,6 @@ class MessagesPage extends StatefulWidget {
 
 class _MessagesPageState extends State<MessagesPage> {
   final controller = MessagesController();
-
-  final pages = [
-    Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          ChatList(
-            data: ChatModel(
-              name: "Jessica Vasconcelos",
-              status:"Online",
-              lastView:"3 dias",
-              lastMessage: "What this name ?",
-              photo:""
-              )
-          ),
-          ChatList(
-            data: ChatModel(
-              name: "Jessica Vasconcelos",
-              status:"Online",
-              lastView:"",
-              lastMessage: "What this name ?",
-              photo:""
-              )
-          ),
-          ChatList(
-            data: ChatModel(
-              name: "Jessica Vasconcelos",
-              status:"",
-              lastView:"3 dias",
-              lastMessage: "What this name ?",
-              photo:""
-              )
-          ),
-        ],
-      ),
-    )];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +31,49 @@ class _MessagesPageState extends State<MessagesPage> {
                     fontWeight: FontWeight.bold),
               )))),
         ),
-        body: pages[controller.currentPage],
+        body:    Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ChatList(
+            data: ChatModel(
+              name: "Pedro Santos",
+              status:"Online",
+              lastView:"3 dias",
+              lastMessage: "",
+              photo:"person2.jpeg"
+            ),
+              onTap: () {
+                        Navigator.pushNamed(context, "/chat");
+                      }
+          ),
+          ChatList(
+            data: ChatModel(
+              name: "Jessica Vasconcelos",
+              status:"Online",
+              lastView:"",
+              lastMessage: "",
+              photo:"person2.jpeg"
+              ),
+                            onTap: () {
+                        Navigator.pushNamed(context, "/chat");
+                      }
+          ),
+          ChatList(
+            data: ChatModel(
+              name: "Laura Geovanne",
+              status:"",
+              lastView:"3 dias",
+              lastMessage: "",
+              photo:"person2.jpeg"
+              ),
+                            onTap: () {
+                        Navigator.pushNamed(context, "/chat");
+                      }
+          ),
+        ],
+      ),
+    ),
         bottomNavigationBar: Container(
             height: 60,
             child: Row(

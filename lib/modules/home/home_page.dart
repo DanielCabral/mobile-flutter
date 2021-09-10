@@ -1,22 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:learnenglish/modules/home/home_controller.dart';
+import 'package:learnenglish/shared/shared/models/user_model.dart';
 import 'package:learnenglish/shared/themes/app_colors.dart';
 import 'package:learnenglish/shared/widgets/lessonsList/lessons_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
-  
-  const HomePage({Key? key}) : super(key: key);
+  final UserModel user;
+  const HomePage({Key? key, required this.user}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
-final List<String> entries = <String>['A', 'B', 'C'];
+
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
 
-  final pages = [
-    Container(
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(152),
+          child: Container(
+              height: 142,
+              color: AppColors.primary,
+              child: Center(
+                  child: ListTile(
+                      title: Text(
+                        "Home",
+                        style: TextStyle(
+                            color: AppColors.background,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      trailing: InkWell(
+                          onTap: () async {
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            prefs.remove('user');
+                            Navigator.pushNamed(context,"/login");
+                          },
+                          child: Icon(Icons.logout_outlined, color: AppColors.background),
+                        ),
+                  )
+              )
+            ),
+        ),
+        body: SingleChildScrollView(child:   Container(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -32,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     children: [
                       TextSpan(
-                          text: "Gabriel",
+                          text: "${widget.user.name}",
                           style: TextStyle(fontWeight: FontWeight.bold))
                     ]),
               ),
@@ -40,9 +70,10 @@ class _HomePageState extends State<HomePage> {
                 height: 48,
                 width: 48,
                 decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: NetworkImage(widget.user.photoURL!))),
               ),
             ),
             ListTile(
@@ -68,46 +99,20 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            Column(
-              children: [
-                ListTile(
-                    title: Text(
-                      "Suas Aulas",
+            Column(children: [
+              ListTile(
+                  title: Text("Suas Aulas",
                       style: TextStyle(
                           color: AppColors.secondary,
                           fontSize: 16,
-                          fontWeight: FontWeight.bold
-                      )
-                    )
-                ),
-                LessonsList(),
-              ]
-            )
+                          fontWeight: FontWeight.bold))),
+              LessonsList(),
+            ])
           ],
         ),
-        ),
       ),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(152),
-          child: Container(
-              height: 142,
-              color: AppColors.primary,
-              child: Center(
-                  child: ListTile(
-                      title: Text(
-                "Home",
-                style: TextStyle(
-                    color: AppColors.background,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              )))),
-        ),
-        body: SingleChildScrollView(child: pages[controller.currentPage]),
+    ),
+  ),
         bottomNavigationBar: Container(
             height: 60,
             child: Row(
